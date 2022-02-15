@@ -10,7 +10,7 @@ class ReadNoteForm(forms.ModelForm):
 
     class Meta:
         model = ReadNoteModel
-        fields = ['id', 'title', 'submit_time', 'edit_time', 'link']
+        fields = ['id', 'title', 'submit_time', 'content', 'edit_time', 'link']
 
 
 

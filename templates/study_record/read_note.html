@@ -7,20 +7,33 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/read_note.css' %}">
 </head>
 <body>
-<table id="read_note_table">
-    <tr>
-        <td>id</td>
-        <td>标题</td>
-        <td>链接</td>
-    </tr>
-    {% for item in my_read_note %}
+{% if read_note_list %}
+    <table id="read_note_table">
         <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.title }}</td>
-            <td>{{ item.link }}</td>
+            <td>id</td>
+            <td>标题</td>
+            <td>链接</td>
         </tr>
-    {% endfor %}
-</table>
-
+        {% for item in read_note_list %}
+            <tr>
+                <td><a href="read/{{ item.id }}/">{{ item.id }}</a></td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.link }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% elif read_note_detail %}
+    id：{{ read_note_detail.id }}<br/>
+    标题：{{ read_note_detail.title }}<br/>
+    正文：{{ read_note_detail.content }}<br/>
+    提交时间：{{ read_note_detail.submit_time }}<br/>
+    最后编辑时间：{{ read_note_detail.edit_time }}<br/>
+{% elif read_note_edit_form %}
+    <form method="post">
+    {% csrf_token %}
+    {{ read_note_edit_form.as_p }}
+    <input type="submit" value="Update">
+    </form>
+{% endif %}
 </body>
 </html>
