@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>阅读笔记</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/read_note.css' %}">
+</head>
+<body>
+<table id="read_note_table">
+    <tr>
+        <td>id</td>
+        <td>标题</td>
+        <td>链接</td>
+    </tr>
+    {% for item in my_read_note %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.link }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
