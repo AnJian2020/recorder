@@ -16,7 +16,7 @@
         </tr>
         {% for item in read_note_list %}
             <tr>
-                <td><a href="read/{{ item.id }}/">{{ item.id }}</a></td>
+                <td><a href="read/{{ item.id }}/detail">{{ item.id }}</a></td>
                 <td>{{ item.title }}</td>
                 <td>{{ item.link }}</td>
             </tr>
@@ -28,11 +28,18 @@
     正文：{{ read_note_detail.content }}<br/>
     提交时间：{{ read_note_detail.submit_time }}<br/>
     最后编辑时间：{{ read_note_detail.edit_time }}<br/>
-{% elif read_note_edit_form %}
+{% elif read_note_edit %}
+    <form method="post">
+        {% csrf_token %}
+        {{ read_note_edit_form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+{% elif read_note_delete %}
     <form method="post">
     {% csrf_token %}
-    {{ read_note_edit_form.as_p }}
-    <input type="submit" value="Update">
+    <p>是否确定删除"{{ object.title }}"</p>
+    {{ form }}
+    <input type="submit" value="delete">
     </form>
 {% endif %}
 </body>
