@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {#    <link type="text/css" rel="stylesheet" href="{% static 'css/read_note.css' %}">#}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+</head>
+<body>
+<div id="header">
+    {% block header %}
+    {% endblock %}
+</div>
+<div id="sidebar">
+    {% block sidebar %}
+    {% endblock %}
+</div>
+<div id="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+
+</html>

@@ -1,9 +1,12 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 from django.views.generic import ListView, DeleteView, DetailView
 from django.views.generic.edit import UpdateView, CreateView
 from .models import ReadNoteModel
 from django.urls import reverse_lazy
-# from .forms import ReadNoteForm
+
+
+def index(request):
+    return render(request, template_name="study_record/read.html")
 
 
 class ReadNoteListView(ListView):
@@ -49,10 +52,12 @@ class ReadNoteDeleteView(DeleteView):
 class ReadNoteCreateView(CreateView):
     model = ReadNoteModel
     template_name = "study_record/read_note.html"
-    context_object_name = "read_note_create"
     fields = ['title', 'content', 'link']
+    success_url = reverse_lazy('read_list')
 
     def get_context_data(self, **kwargs):
         context = super(ReadNoteCreateView, self).get_context_data(**kwargs)
         context['read_note_create_form'] = context.get('form')
+        context['read_note_create'] = True
         return context
+

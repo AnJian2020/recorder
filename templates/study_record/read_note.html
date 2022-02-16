@@ -38,8 +38,14 @@
     <form method="post">
     {% csrf_token %}
     <p>是否确定删除"{{ object.title }}"</p>
-    {{ form }}
+    {{ read_note_delete_form }}
     <input type="submit" value="delete">
+    </form>
+{% elif read_note_create %}
+    <form method="post">
+    {% csrf_token %}
+    {{ read_note_create_form.as_p }}
+    <input type="submit" value="create">
     </form>
 {% endif %}
 </body>
