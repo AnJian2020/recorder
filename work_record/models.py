@@ -62,6 +62,26 @@ class IndustryDevelopmentModel(models.Model):
     industry_category = models.CharField(verbose_name='行业类型', max_length=256, choices=IndustryCategory.choices,
                                          default=IndustryCategory.INFORMATION_TRANSMISSION_SOFTWARE_INFORMATION_TECHNOLOGY_SERVICES)
     file_link = models.FileField(verbose_name='文件链接', upload_to='industry_development/%Y/%m/%d')
+    brief_introduction = models.CharField(verbose_name="简介", max_length=512)
+    units_concerned = models.CharField(verbose_name="有关单位", max_length=512)
     publish_time = models.DateField(verbose_name="发表时间", default=timezone.now)
-
     submit_time = models.DateTimeField(verbose_name='提交时间', default=timezone.now)
+    edit_time = models.DateTimeField(verbose_name="最后编辑时间", default=timezone.now)
+    submit_user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name="提交人员")
+
+    def __str__(self):
+        return "id: %s title: %s" % (self.id, self.title)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.submit_time = timezone.now()
+            self.id = 'ID' + self.submit_time.year.__str__() + self.submit_time.month.__str__() + \
+                      self.submit_time.day.__str__() + self.submit_time.hour.__str__() + self.submit_time.minute.__str__() + \
+                      self.submit_time.second.__str__()
+        self.edit_time = timezone.now()
+        return super(IndustryDevelopmentModel, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "行业发展报告"
+        verbose_name_plural = "行业发展报告"
+        db_table = "industry_development_table"
