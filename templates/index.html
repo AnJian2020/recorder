@@ -1,4 +1,17 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}首页{% endblock %}
+{% block content %}
+    <header class="py-5">
+        <div class="container px-lg-5" >
+            <div class="p-4 p-lg-5 rounded-3 text-center" >
+                <div class="m-4 m-lg-5" >
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-0" >
+                        <input type="search" class="form-control form-control-sm" placeholder="搜索..."
+                               aria-label="Search" style="height: 40px">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
 
+{% endblock %}
